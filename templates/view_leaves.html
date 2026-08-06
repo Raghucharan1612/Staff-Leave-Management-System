@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View_Leaves</title>
+    <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#3b82f6;
+    --light:#dbeafe;
+    --extra-light:#eff6ff;
+    --dark:#1e3a8a;
+    --white:#ffffff;
+}
+
+body{
+    background:
+    radial-gradient(circle at top right,
+    rgba(37,99,235,0.12),
+    transparent 30%),
+
+    radial-gradient(circle at bottom left,
+    rgba(59,130,246,0.10),
+    transparent 35%),
+
+    #ffffff;
+
+    min-height:100vh;
+    padding:40px;
+}
+
+h2{
+    text-align:center;
+    color:var(--dark);
+    margin-bottom:30px;
+    font-size:32px;
+    font-weight:bold;
+}
+
+/* Table */
+
+table{
+    width:95%;
+    margin:auto;
+
+    border-collapse:collapse;
+
+    background:rgba(255,255,255,0.95);
+
+    backdrop-filter:blur(10px);
+
+    border:1px solid var(--light);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 10px 35px rgba(37,99,235,0.12);
+}
+
+/* Header */
+
+th{
+
+    background:
+    linear-gradient(
+    90deg,
+    var(--primary),
+    var(--secondary));
+
+    color:white;
+
+    padding:18px;
+
+    text-align:center;
+
+    font-size:16px;
+
+    letter-spacing:0.5px;
+}
+
+/* Table Data */
+
+td{
+
+    padding:15px;
+
+    text-align:center;
+
+    color:#333;
+
+    border-bottom:
+    1px solid #edf2f7;
+}
+
+/* Alternate Rows */
+
+tr:nth-child(even){
+
+    background:#f8fbff;
+}
+
+/* Hover Effect */
+
+tr:hover{
+
+    background:#eaf3ff;
+
+    transition:0.3s;
+}
+
+/* Action Buttons */
+
+td a{
+
+    text-decoration:none;
+
+    color:white;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    margin:0 5px;
+
+    display:inline-block;
+
+    transition:all 0.3s ease;
+}
+
+/* Approve */
+
+td a:first-child{
+
+    background:#22c55e;
+
+    box-shadow:
+    0 4px 12px rgba(34,197,94,0.25);
+}
+
+td a:first-child:hover{
+
+    background:#16a34a;
+
+    transform:translateY(-2px);
+}
+
+/* Reject */
+
+td a:last-child{
+
+    background:#ef4444;
+
+    box-shadow:
+    0 4px 12px rgba(239,68,68,0.25);
+}
+
+td a:last-child:hover{
+
+    background:#dc2626;
+
+    transform:translateY(-2px);
+}
+
+/* Back Button */
+
+br + a{
+
+    display:block;
+
+    width:280px;
+
+    margin:35px auto;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary));
+
+    color:white;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-weight:bold;
+
+    box-shadow:
+    0 8px 20px rgba(37,99,235,0.25);
+
+    transition:all 0.3s ease;
+}
+
+br + a:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 12px 28px rgba(37,99,235,0.35);
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    body{
+        padding:15px;
+    }
+
+    table{
+
+        display:block;
+
+        overflow-x:auto;
+
+        white-space:nowrap;
+    }
+
+    h2{
+
+        font-size:26px;
+    }
+}
+</style>
+</head>
+<body>
+    <h2>Staff Leave Requests</h2>
+    <table>
+        <tr>
+            <th>Staff Name</th>
+            <th>Leave Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Reason</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        {% for i in leaves %}
+        <tr>
+            <td>{{i.user.username}}</td>
+            <td>{{i.leave_type}}</td>
+            <td>{{i.start_date}}</td>
+            <td>{{i.end_date}}</td>
+            <td>{{i.reason}}</td>
+            <td>{{i.status}}</td>
+            <td>
+                {% if i.status == 'Pending' %}
+                <a href="{% url 'approve_leave' i.id %}">Approve</a>
+                <a href="{% url 'reject_leave' i.id%}">Reject</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td>No Leave requests found</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="{% url 'admin_dashboard' %}">Back to Admin Dashboard</a>
+</body>
+</html>

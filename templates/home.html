@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLMS Home</title>
+
+    <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#3b82f6;
+    --light:#dbeafe;
+    --extra-light:#eff6ff;
+    --dark:#1e3a8a;
+}
+
+/* Body */
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    background:
+
+    radial-gradient(
+    circle at top right,
+    rgba(37,99,235,0.12),
+    transparent 30%),
+
+    radial-gradient(
+    circle at bottom left,
+    rgba(59,130,246,0.10),
+    transparent 35%),
+
+    #ffffff;
+}
+
+/* Remove overlay */
+
+body::before{
+
+    content:none;
+}
+
+/* Main Container */
+
+.container{
+
+    width:500px;
+
+    padding:45px;
+
+    text-align:center;
+
+    background:
+    rgba(255,255,255,0.95);
+
+    border:1px solid var(--light);
+
+    border-radius:24px;
+
+    backdrop-filter:blur(10px);
+
+    box-shadow:
+    0 12px 35px rgba(37,99,235,0.12);
+}
+
+/* Heading */
+
+h1{
+
+    color:var(--dark);
+
+    font-size:42px;
+
+    margin-bottom:15px;
+
+    font-weight:bold;
+}
+
+/* Subtitle */
+
+p{
+
+    color:#4b5563;
+
+    font-size:18px;
+
+    margin-bottom:35px;
+
+    line-height:1.6;
+}
+
+/* Common Button */
+
+.btn{
+
+    display:inline-block;
+
+    width:180px;
+
+    padding:14px;
+
+    margin:10px;
+
+    text-decoration:none;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    border-radius:12px;
+
+    transition:all 0.3s ease;
+}
+
+/* Login Button */
+
+.login{
+
+    background:
+    linear-gradient(
+    135deg,
+    var(--primary),
+    var(--secondary));
+
+    box-shadow:
+    0 8px 20px rgba(37,99,235,0.25);
+}
+
+.login:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 12px 28px rgba(37,99,235,0.35);
+}
+
+/* Register Button */
+
+.register{
+
+    background:
+    linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a);
+
+    box-shadow:
+    0 8px 20px rgba(34,197,94,0.25);
+}
+
+.register:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 12px 28px rgba(34,197,94,0.35);
+}
+
+/* Footer */
+
+footer{
+
+    margin-top:35px;
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    border-top:
+
+    1px solid var(--light);
+
+    padding-top:18px;
+}
+
+/* Responsive */
+
+@media(max-width:600px){
+
+    .container{
+
+        width:95%;
+
+        padding:30px;
+    }
+
+    h1{
+
+        font-size:32px;
+    }
+
+    p{
+
+        font-size:16px;
+    }
+
+    .btn{
+
+        width:100%;
+
+        margin:8px 0;
+    }
+}
+
+</style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>SLMS</h1>
+
+        <p>
+            Staff Leave Management System
+        </p>
+
+        <a href="{% url 'login' %}" class="btn login">
+            Login
+        </a>
+
+        <a href="{% url 'register' %}" class="btn register">
+            Register
+        </a>
+
+        <footer>
+            © 2026 Dhee Coding Lab (DCL) | All Rights Reserved
+        </footer>
+    </div>
+
+</body>
+</html>

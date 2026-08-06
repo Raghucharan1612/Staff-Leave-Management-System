@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Staff</title>
+
+    <style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+:root{
+    --primary:#2563eb;
+    --secondary:#3b82f6;
+    --light:#dbeafe;
+    --extra-light:#eff6ff;
+    --dark:#1e3a8a;
+    --white:#ffffff;
+}
+
+/* Body */
+
+body{
+
+    background:
+    radial-gradient(circle at top right,
+    rgba(37,99,235,0.12),
+    transparent 30%),
+
+    radial-gradient(circle at bottom left,
+    rgba(59,130,246,0.10),
+    transparent 35%),
+
+    #ffffff;
+
+    min-height:100vh;
+
+    padding:40px;
+}
+
+/* Heading */
+
+h2{
+
+    text-align:center;
+
+    color:var(--dark);
+
+    font-size:32px;
+
+    margin-bottom:30px;
+
+    font-weight:bold;
+}
+
+/* Remove underline */
+
+a{
+
+    text-decoration:none;
+}
+
+/* Add Staff Button */
+
+.add-btn,
+.top-link{
+
+    display:block;
+
+    width:220px;
+
+    margin:25px auto;
+
+    text-align:center;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-weight:bold;
+
+    background:
+    linear-gradient(
+    135deg,
+    #22c55e,
+    #16a34a);
+
+    box-shadow:
+    0 8px 20px rgba(34,197,94,0.25);
+
+    transition:all 0.3s ease;
+}
+
+.add-btn:hover,
+.top-link:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 12px 28px rgba(34,197,94,0.35);
+}
+
+/* Table */
+
+table{
+
+    width:85%;
+
+    margin:25px auto;
+
+    border-collapse:collapse;
+
+    background:rgba(255,255,255,0.95);
+
+    border:1px solid var(--light);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 12px 35px rgba(37,99,235,0.12);
+}
+
+/* Header */
+
+th{
+
+    background:
+    linear-gradient(
+    90deg,
+    var(--primary),
+    var(--secondary));
+
+    color:white;
+
+    padding:18px;
+
+    font-size:16px;
+
+    letter-spacing:0.5px;
+}
+
+/* Table Cells */
+
+td{
+
+    padding:15px;
+
+    text-align:center;
+
+    color:#374151;
+
+    border-bottom:
+    1px solid #edf2f7;
+}
+
+/* Alternate Rows */
+
+tr:nth-child(even){
+
+    background:#f8fbff;
+}
+
+/* Hover */
+
+tr:hover{
+
+    background:#eaf3ff;
+
+    transition:0.3s;
+}
+
+/* Edit Button */
+
+.edit-btn{
+
+    background:
+    linear-gradient(
+    135deg,
+    #facc15,
+    #f59e0b);
+
+    color:#111827;
+
+    padding:8px 14px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    margin-right:8px;
+
+    transition:0.3s;
+}
+
+.edit-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 18px rgba(245,158,11,0.35);
+}
+
+/* Delete Button */
+
+.delete-btn{
+
+    background:
+    linear-gradient(
+    135deg,
+    #ef4444,
+    #dc2626);
+
+    color:white;
+
+    padding:8px 14px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    transition:0.3s;
+}
+
+.delete-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 8px 18px rgba(239,68,68,0.35);
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    body{
+
+        padding:15px;
+    }
+
+    table{
+
+        width:100%;
+
+        display:block;
+
+        overflow-x:auto;
+
+        white-space:nowrap;
+    }
+
+    h2{
+
+        font-size:26px;
+    }
+
+    .add-btn,
+    .top-link{
+
+        width:100%;
+        max-width:250px;
+    }
+}
+
+</style>
+</head>
+<body>
+    <h2>Manage_staff</h2>
+    <a href="{% url 'add_staff' %}">+ Add Staff</a>
+
+    <table border="1px">
+        <tr>
+            <th>Username</th>
+            <th>Action</th>
+        </tr>
+
+        {% for i in staff_list %}
+
+        <tr>
+            <td>{{i.username}}</td>
+            <td>
+                <a href="{% url 'edit_staff' i.id %}">Edit</a>
+                <a href="{% url 'delete_staff' i.id %}" onClick="return confirm('are u sure')">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+        <a href="{% url 'admin_dashboard' %}">Back to Admin Dashboard</a>
+</body>
+</html>
