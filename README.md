@@ -30,7 +30,6 @@ The application uses **SQLite3** as the default database and follows the Django 
 - Django
 - HTML5
 - CSS3
-- Bootstrap
 - SQLite3
 - Django Templates
 
